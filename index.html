@@ -33,22 +33,12 @@
             background-color: #d3d3d3;
             color: black;
         }
-        #message {
+        #message, #valentineMessage {
             font-size: 20px;
             font-weight: bold;
             color: #ff1493;
-            margin-top: 20px;
+            margin-top: 10px;
             display: none; /* Oculto al inicio */
-        }
-        #loveMessage {
-            font-size: 22px;
-            color: #ff1493;
-            font-weight: bold;
-            display: none; /* Oculto al inicio */
-        }
-        #countDisplay {
-            font-size: 16px;
-            color: black;
         }
         #sticker {
             display: none; /* La imagen estará oculta al inicio */
@@ -57,23 +47,20 @@
     </style>
 </head>
 <body>
-    <h1>¿Quieres ser mi san Valentín? 💌</h1>
+    <h1>¿Quieres ser mi San Valentín? 💌</h1>
 
-    <!-- Imagen que cambiará según la opción elegida -->
     <img id="sticker" src="" alt="Sticker animado">
 
     <button id="yesButton">Sí</button>
     <button id="noButton">No</button>
+    
     <p id="message">Sabía que escogerías el Sí 💖</p>
-    <p id="loveMessage">¿Te gustaría ser el amor de mi vida para el resto de nuestras vidas? 💖</p>
-
+    <p id="valentineMessage">Feliz día de San Valentín 💖</p>
 
     <script>
-        let yesCount = 0;
         let sticker = document.getElementById('sticker');
         let slideshowInterval = null;
 
-        // Lista de imágenes para la opción "No"
         let noImages = [
             "https://media.tenor.com/2ubIjSqbWH4AAAAj/funny-angry.gif",
             "https://media.tenor.com/47dxAJYMZv8AAAAj/peach-goma.gif",
@@ -82,45 +69,22 @@
         ];
 
         let yesImages = [
-        "https://media.tenor.com/9JCnVCfH44AAAAAM/kristigocouple2024.gif"
+            "https://media.tenor.com/9JCnVCfH44AAAAAM/kristigocouple2024.gif"
         ];
 
         document.getElementById('yesButton').addEventListener('click', () => {
-            yesCount++; // Aumentar el contador
-            sticker.src = "https://media.tenor.com/9JCnVCfH44AAAAAM/kristigocouple2024.gif"; // Imagen de "Sí"
-            document.getElementById('message').style.display = "block";  // Mostrar el mensaje "Sabía que escogerías el Sí"
-            document.getElementById('loveMessage').style.display = "block"; // Mostrar "¿Te gustaría ser el amor de mi vida para toda la vida?"
-
-            let index = 0;
-            sticker.style.display = "block"; // Mostrar la imagen
-
-            // Detener cualquier intervalo anterior
-            clearInterval(slideshowInterval);
-
-            // Función para cambiar la imagen cada 2 segundos
-            slideshowInterval = setInterval(() => {
-                sticker.src = yesImages[index]; // Cambiar la imagen
-                index = (index + 1) % yesImages.length; // Pasar a la siguiente imagen
-            }, 2000); // Cambia cada 2 segundos
+            sticker.src = yesImages[0];
+            document.getElementById('message').style.display = "block";
+            document.getElementById('valentineMessage').style.display = "block";
+            sticker.style.display = "block";
         });
 
         document.getElementById('noButton').addEventListener('click', () => {
-            yesCount++; // Aumentar el contador
-
-            // Seleccionar una imagen aleatoria para "No"
             let randomIndex = Math.floor(Math.random() * noImages.length);
-            let randomImage = noImages[randomIndex];
-
-            sticker.src = randomImage;  // Asignar la nueva imagen
-            sticker.style.display = "block";  // Mostrar la imagen
-
-            // Ocultar ambos mensajes
-            document.getElementById('message').style.display = "none";  // Ocultar mensaje "Sabía que escogerías el Sí"
-            document.getElementById('loveMessage').style.display = "none"; // Ocultar mensaje "¿Te gustaría ser el amor de mi vida para toda la vida?"
-
-
-            // Detener el slideshow si estaba en ejecución
-            clearInterval(slideshowInterval);
+            sticker.src = noImages[randomIndex];
+            sticker.style.display = "block";
+            document.getElementById('message').style.display = "none";
+            document.getElementById('valentineMessage').style.display = "none";
         });
     </script>
 </body>
